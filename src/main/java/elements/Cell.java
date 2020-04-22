@@ -23,8 +23,12 @@ public class Cell extends Rectangle {
 
     public static Cell getCellFromGridPane(GridPane gridPane, int row, int col) {
         for (Node node : gridPane.getChildren()) {
-            if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
-                return (Cell) node;
+            try {
+                if (GridPane.getColumnIndex(node) == col && GridPane.getRowIndex(node) == row) {
+                    return (Cell) node;
+                }
+            } catch (Exception e) {
+                return new Cell(0);
             }
         }
         return null;

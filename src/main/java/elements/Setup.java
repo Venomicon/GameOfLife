@@ -1,6 +1,5 @@
 package elements;
 
-import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
 import java.util.Random;
@@ -21,9 +20,6 @@ public class Setup {
             default:
                 throw new IllegalArgumentException(iteration + " not allowed");
         }
-        gridPane.setPrefSize(750, 750);
-        gridPane.setGridLinesVisible(true);
-        gridPane.setAlignment(Pos.CENTER);
         return gridPane;
     }
 
