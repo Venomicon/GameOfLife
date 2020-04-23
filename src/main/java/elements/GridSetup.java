@@ -1,10 +1,11 @@
 package elements;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
 
 import java.util.Random;
 
-public class Setup {
+public class GridSetup {
     public static GridPane setupGrid(int iteration) {
         GridPane gridPane;
         switch (iteration) {
@@ -20,7 +21,39 @@ public class Setup {
             default:
                 throw new IllegalArgumentException(iteration + " not allowed");
         }
+        adjustGridPane(gridPane);
         return gridPane;
+    }
+
+    public static GridPane setupGridAfterTick(GridPane gridPane) {
+        GridPane newGrid = new GridPane();
+        for (int i = 0; i < 50; i++) {
+            for (int j = 0; j < 50; j++) {
+                Cell cell = Cell.getCellFromGridPane(gridPane, i, j);
+                int sum = Cell.countNeighbours(gridPane, cell);
+                if (cell.getState() == 1) {
+                    if (sum < 2 || sum > 3) {
+                        newGrid.add(new Cell(0), j, i);
+                    } else {
+                        newGrid.add(new Cell(1), j, i);
+                    }
+                } else {
+                    if (sum == 3) {
+                        newGrid.add(new Cell(1), j, i);
+                    } else {
+                        newGrid.add(new Cell(0), j, i);
+                    }
+                }
+            }
+        }
+        GridSetup.adjustGridPane(newGrid);
+        return newGrid;
+    }
+
+    public static void adjustGridPane(GridPane gridPane) {
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setGridLinesVisible(true);
+        gridPane.setPrefSize(750, 750);
     }
 
     private static GridPane setupRandom() {

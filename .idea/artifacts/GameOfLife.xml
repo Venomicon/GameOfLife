@@ -1,0 +1,29 @@
+<component name="ArtifactManager">
+  <artifact type="javafx" name="GameOfLife">
+    <output-path>$PROJECT_DIR$/out/artifacts/GameOfLife</output-path>
+    <properties id="javafx-properties">
+      <options>
+        <option name="appClass" value="GameOfLife" />
+        <option name="description" value="" />
+        <option name="height" value="750" />
+        <option name="htmlPlaceholderId" value="" />
+        <option name="nativeBundle" value="all" />
+        <option name="title" value="" />
+        <option name="vendor" value="" />
+        <option name="version" value="" />
+        <option name="width" value="750" />
+      </options>
+    </properties>
+    <root id="root">
+      <element id="archive" name="GameOfLife.jar">
+        <element id="directory" name="META-INF">
+          <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+        </element>
+        <element id="library" level="project" name="Gradle: org.projectlombok:lombok:1.18.10" />
+        <element id="library" level="project" name="Gradle: junit:junit:4.12" />
+        <element id="library" level="project" name="Gradle: org.hamcrest:hamcrest-core:1.3" />
+        <element id="module-output" name="GameOfLife.main" />
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -6,6 +6,8 @@ import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 import lombok.Getter;
 
+import java.util.Optional;
+
 @Getter
 public class Cell extends Rectangle {
     private int state;
@@ -32,6 +34,23 @@ public class Cell extends Rectangle {
             }
         }
         return null;
+    }
+
+    public static int countNeighbours(GridPane gridPane, Node node) {
+        int sum = 0;
+        int row = GridPane.getRowIndex(node);
+        int col = GridPane.getColumnIndex(node);
+        Cell cell = (Cell) node;
+        for (int i = -1; i < 2; i++) {
+            for (int j = -1; j < 2; j++) {
+                Optional<Cell> cellOptional = Optional.ofNullable(getCellFromGridPane(gridPane, row + i, col + j));
+                if (cellOptional.isPresent()) {
+                    sum += cellOptional.get().getState();
+                }
+            }
+        }
+        sum -= cell.getState();
+        return sum;
     }
 
     public void setState(int state) {
