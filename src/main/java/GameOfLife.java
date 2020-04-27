@@ -6,9 +6,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -54,28 +54,16 @@ public final class GameOfLife extends Application implements EventHandler<Action
      */
     int iteration = 0;
 
-    private GridPane gridPane;
-    private Scene scene;
-    private Stage primaryStage;
-    private Timeline timeline;
+    public static int BOARD_SIZE = 50;
+    public static double GAME_SPEED_IN_SECONDS = 1.0 / 30;
+    public static int[][] beforeTick = new int[BOARD_SIZE][BOARD_SIZE];
+    public static int[][] afterTick = new int[BOARD_SIZE][BOARD_SIZE];
 
-    /**
-     * Provides initial values for {@link GameOfLife} private attributes:
-     * <ul>
-     *     <li>Sets up {@code GridPane} game board via {@link GridUtils#setupGrid(int iteration)}
-     *              based on {@link GameOfLife#iteration} number.</li>
-     *     <li>Sets {@link Scene} size to 750 x 750 pixels and assigns created {@code GridPane} to it.</li>
-     *     <li>Creates new {@link Timeline} object responsible for game loop logic.</li>
-     * </ul>
-     *
-     * @see Application#init()
-     */
-    @Override
-    public void init() {
-        gridPane = GridUtils.setupGrid(iteration);
-        scene = new Scene(gridPane, 750, 750);
-        timeline = new Timeline();
-    }
+    private final GameBoard gameBoard = new GameBoard();
+    private final Timeline timeline = new Timeline();
+    private GridPane gridPane = gameBoard.setupGrid(iteration);
+    private Scene scene = new Scene(gridPane);
+    private Stage stage = new Stage();
 
     /**
      * The main entry point of JavaFX application. It controls the {@link Timeline} object, which together with
@@ -87,34 +75,39 @@ public final class GameOfLife extends Application implements EventHandler<Action
      * therefore cycling through the available {@code GridPane} game board patterns.
      * </p>
      *
-     * @param stage the primary stage for this application, onto which the application scene can be set.
+     * @param primaryStage the primary stage for this application, onto which the application scene can be set.
      * @see Application#start(Stage)
      */
     @Override
-    public void start(Stage stage) {
-        primaryStage = stage;
-        primaryStage.setTitle("Game Of Life");
-        primaryStage.setResizable(false);
-        primaryStage.setScene(scene);
-        primaryStage.setOnCloseRequest(event -> Platform.exit());
-        primaryStage.show();
+    public void start(Stage primaryStage) {
+        //Game scene
+        stage.setResizable(false);
+        stage.setWidth(16 * BOARD_SIZE);
+        stage.setHeight(16 * BOARD_SIZE);
+        stage.setTitle("Game Of Life");
+        stage.setOnCloseRequest(event -> Platform.exit());
+        stage.setScene(scene);
+        stage.show();
 
+        //Animation controller
         timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.setDelay(Duration.seconds(2));
         timeline.getKeyFrames().addAll(new KeyFrame(
-                Duration.seconds(1),
+                Duration.seconds(GAME_SPEED_IN_SECONDS),
                 this
         ));
         timeline.play();
 
+        //ENTER key listener
         scene.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ENTER) {
                 iteration++;
                 if (iteration < 3) {
                     timeline.stop();
-                    gridPane = GridUtils.setupGrid(iteration);
-                    scene.setRoot(gridPane);
-                    primaryStage.setScene(scene);
-                    primaryStage.show();
+                    GridPane newGrid = gameBoard.setupGrid(iteration);
+                    scene.setRoot(newGrid);
+                    stage.setScene(scene);
+                    stage.show();
                     timeline.play();
                 } else {
                     Platform.exit();
@@ -125,7 +118,7 @@ public final class GameOfLife extends Application implements EventHandler<Action
 
     /**
      * Event handler for {@link Timeline} attribute.
-     * This handler is responsible for performing tick logic via {@link GridUtils#performTick(GridPane)},
+     * This handler is responsible for performing tick logic via {@link Tick} class,
      * and forwarding the resulting {@link GridPane} to the main {@link Stage}, which renders it on screen.
      *
      * @param event target {@link ActionEvent}
@@ -133,9 +126,11 @@ public final class GameOfLife extends Application implements EventHandler<Action
      */
     @Override
     public void handle(ActionEvent event) {
-        gridPane = GridUtils.performTick(gridPane);
+        afterTick = Tick.getValuesAfterTick(beforeTick);
+        gridPane = Tick.buildGridAfterTick(afterTick);
+        gridPane.setAlignment(Pos.CENTER);
         scene.setRoot(gridPane);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        stage.setScene(scene);
+        stage.show();
     }
 }
