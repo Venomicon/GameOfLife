@@ -65,6 +65,10 @@ public final class GameOfLife extends Application implements EventHandler<Action
     private Scene scene = new Scene(gridPane);
     private Stage stage = new Stage();
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     /**
      * The main entry point of JavaFX application. It controls the {@link Timeline} object, which together with
      * {@link GameOfLife#handle(ActionEvent)} method are responsible for proper game loop logic.
