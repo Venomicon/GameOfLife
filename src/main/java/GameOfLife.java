@@ -63,7 +63,7 @@ public final class GameOfLife extends Application implements EventHandler<Action
     private final Timeline timeline = new Timeline();
     private GridPane gridPane = gameBoard.setupGrid(iteration);
     private Scene scene = new Scene(gridPane);
-    private Stage stage;
+    private Stage stage = new Stage();
 
     public static void main(String[] args) {
         launch(args);
