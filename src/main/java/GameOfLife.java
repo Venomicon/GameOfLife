@@ -39,8 +39,8 @@ import javafx.util.Duration;
  *      </p>
  *  </div>
  *
- * @see <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life</a>
  * @author Jan Gajda
+ * @see <a href="https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life</a>
  */
 public final class GameOfLife extends Application implements EventHandler<ActionEvent> {
     /**
@@ -54,8 +54,8 @@ public final class GameOfLife extends Application implements EventHandler<Action
      */
     int iteration = 0;
 
-    public static int BOARD_SIZE = 50;
-    public static double GAME_SPEED_IN_SECONDS = 1.0 / 30;
+    public static final int BOARD_SIZE = 50;
+    public static final double GAME_SPEED_IN_SECONDS = 1.0 / 30;
     public static int[][] beforeTick = new int[BOARD_SIZE][BOARD_SIZE];
     public static int[][] afterTick = new int[BOARD_SIZE][BOARD_SIZE];
 
@@ -63,7 +63,7 @@ public final class GameOfLife extends Application implements EventHandler<Action
     private final Timeline timeline = new Timeline();
     private GridPane gridPane = gameBoard.setupGrid(iteration);
     private Scene scene = new Scene(gridPane);
-    private Stage stage = new Stage();
+    private Stage stage;
 
     public static void main(String[] args) {
         launch(args);

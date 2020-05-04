@@ -4,12 +4,12 @@ import javafx.scene.shape.StrokeType;
 
 /**
  * <p>
- *     This class represents elementary components of a game board. It extends {@link Rectangle} class
- *     for basic graphic visualisation.
+ * This class represents elementary components of a game board. It extends {@link Rectangle} class
+ * for basic graphic visualisation.
  * </p>
  * <p>
- *     It's represented by 15 x 15 pixels rectangles. Each with {@code state} attribute which depicts current state
- *     of a {@code Cell} and its color.
+ * It's represented by 15 x 15 pixels rectangles. Each with {@code state} attribute which depicts current state
+ * of a {@code Cell} and its color.
  * </p>
  *
  * @author Jan Gajda

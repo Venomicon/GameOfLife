@@ -5,11 +5,11 @@ import java.util.Random;
 
 /**
  * <p>
- *     This utility class was extracted to provide transparent static methods alternating the {@link GridPane} game board.
+ * This utility class was extracted to provide transparent methods alternating the {@link GridPane} game board.
  * </p>
  * <p>
- *     It contains of factory method for setting up initial game board in 3 different
- *     patterns required by the recruiting team, {@code GridPane} adjustment method.
+ * It contains of factory method for setting up initial game board in 3 different
+ * patterns required by the recruiting team.
  * </p>
  *
  * @author Jan Gajda
@@ -165,7 +165,7 @@ public final class GameBoard {
     }
 
     /**
-     * Sets up a clear {@link GridPane} as a base for Queen Bee and Tumbler patterns.
+     * Sets up a clear {@link GridPane}, mainly as a base for Queen Bee and Tumbler patterns.
      *
      * @return clear GridPane.
      */

@@ -9,8 +9,8 @@ import javafx.scene.layout.GridPane;
 public class Tick {
     /**
      * <p>
-     *    Given a 2D array of integers representing state of each {@link Cell}, applies the rules of Game Of Life to each
-     *    {@code Cell} and collects them in 2D array representing state of each {@code Cell} after applying these rules.
+     * Given a 2D array of integers representing state of each {@link Cell}, applies the rules of Game Of Life to each
+     * {@code Cell} and collects them in 2D array representing state of each {@code Cell} after applying these rules.
      * </p>
      * <p>
      * The rules are:
@@ -55,7 +55,7 @@ public class Tick {
      * of the game board.
      *
      * @param afterTick 2D array representing state of each {@code Cell} on a game board after applying the rules
-     *      of the John Conway's "Game Of Life".
+     *                  of the John Conway's "Game Of Life".
      * @return visual representation of a game board after performing the tick.
      */
     public static GridPane buildGridAfterTick(int[][] afterTick) {
@@ -75,8 +75,8 @@ public class Tick {
      * Counts the number of alive {@link Cell}s surrounding the target {@code Cell}.
      *
      * @param board target game board.
-     * @param row row number of a target {@code Cell}.
-     * @param col column number of a target {@code Cell}.
+     * @param row   row number of a target {@code Cell}.
+     * @param col   column number of a target {@code Cell}.
      * @return sum of states of {@code Cell}s sorrounding the target {@code Cell}.
      */
     private static int countNeighbours(int[][] board, int row, int col) {
@@ -93,5 +93,4 @@ public class Tick {
         sum -= board[row][col];
         return sum;
     }
-
 }
