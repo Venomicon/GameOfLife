@@ -6,7 +6,7 @@ import javafx.scene.layout.GridPane;
  *
  * @author Jan Gajda
  */
-public class Tick {
+public final class Tick {
     /**
      * <p>
      * Given a 2D array of integers representing state of each {@link Cell}, applies the rules of Game Of Life to each
